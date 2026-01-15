@@ -11525,7 +11525,7 @@ CONTAINS
   real,intent(out),dimension(ims:ime,kms:kme+2,jms:jme ),optional:: &
      lwupflx,lwupflxc,lwdnflx,lwdnflxc
   !dummy variable for debbuging
-  real,intent(out),dimension(ims:ime,jms:jme),optional:: &
+  real,intent(out),dimension(ims:ime,kms:kme,jms:jme),optional:: &
      radlw3d1
 
 !local variables and arrays:
@@ -12127,7 +12127,7 @@ CONTAINS
        !Output debugging variable 
       do k = kts, kte
          if(cldfra3d(i,k,j) .gt. 0.) then
-            radlw3d1(i,k,j) = clwpmcl(ncol,k)
+            radlw3d1(i,k,j) = clwpmcl(1,ncol,k)
          endif
       enddo       
 
