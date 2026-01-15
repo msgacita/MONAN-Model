@@ -669,6 +669,8 @@
                <var name="det_thl"/>
                <var name="det_qv"/>
                <var name="cldfrac_bl"/>
+               <var name="radsw3d1"/>
+               <var name="radlw3d1"/>
                <var name="qc_bl"/>
                <var name="qi_bl"/>
                <var name="ch"/>
