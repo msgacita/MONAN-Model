@@ -11484,7 +11484,8 @@ CONTAINS
                        lwupflx, lwupflxc, lwdnflx, lwdnflxc,      &
                        ids,ide, jds,jde, kds,kde,                 & 
                        ims,ime, jms,jme, kms,kme,                 &
-                       its,ite, jts,jte, kts,kte                  &
+                       its,ite, jts,jte, kts,kte,                 &
+                       radlw3d1                  &
                        )
 
  implicit none
@@ -11523,6 +11524,9 @@ CONTAINS
      rre_cloud,rre_ice,rre_snow
   real,intent(out),dimension(ims:ime,kms:kme+2,jms:jme ),optional:: &
      lwupflx,lwupflxc,lwdnflx,lwdnflxc
+  !dummy variable for debbuging
+  real,intent(out),dimension(ims:ime,jms:jme),optional:: &
+     radlw3d1
 
 !local variables and arrays:
  integer:: nb,ncol,nlay,icld,inflglw,iceflglw,liqflglw
@@ -11760,6 +11764,7 @@ CONTAINS
              cliqwp(ncol,k) = 0.
              cicewp(ncol,k) = 0.
              csnowp(ncol,k) = 0.
+             
           enddo
 
           do k = 1, nlayers
@@ -12118,6 +12123,13 @@ CONTAINS
              endif
           enddo
        endif
+
+       !Output debugging variable 
+      do k = kts, kte
+         if(cldfra3d(i,k,j) .gt. 0.) then
+            radlw3d1(i,k,j) = clwpmcl(ncol,k)
+         endif
+      enddo       
 
        !--- deallocate local column arrays:
        if(allocated(o3mmr)   ) deallocate(o3mmr   )

@@ -762,6 +762,15 @@ real(kind=RKIND),dimension(:,:),allocatable:: &
     qirad_p,          &!cloud ice mixing ratio local to cloudiness and radiation                           [kg/kg]
     qsrad_p,          &!snow mixing ratio local to cloudiness and radiation                                [kg/kg]
     zgrid_p
+
+!=================================================================================================================
+!.. dummy variables for radiation debbuging:
+!=================================================================================================================
+ real(kind=RKIND),dimension(:,:,:),allocatable:: &
+    radsw3d1_p,        &! 'dummy 3d variable 1 in sw for output only'              [-]
+    radlw3d1_p         &! 'dummy 3d variable 1 in lw for output only'              [-]    
+
+
 !=================================================================================================================
 !.. variables and arrays related to land-surface parameterization:
 !=================================================================================================================

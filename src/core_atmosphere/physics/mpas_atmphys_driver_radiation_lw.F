@@ -156,6 +156,8 @@
        if(.not.allocated(lwupflx_p)    ) allocate(lwupflx_p(ims:ime,kms:kme+1,jms:jme)     )
        if(.not.allocated(lwupflxc_p)   ) allocate(lwupflxc_p(ims:ime,kms:kme+1,jms:jme)    )
 
+       if(.not.allocated(radlw3d1_p)   ) allocate(radlw3d1_p(ims:ime,kms:kme,jms:jme)      )  
+
        if(.not.allocated(pin_p)        ) allocate(pin_p(num_oznlevels)                     )
        if(.not.allocated(o3clim_p)     ) allocate(o3clim_p(ims:ime,1:num_oznlevels,jms:jme))
 
@@ -256,6 +258,8 @@
        if(allocated(lwdnflxc_p)   ) deallocate(lwdnflxc_p   )
        if(allocated(lwupflx_p)    ) deallocate(lwupflx_p    )
        if(allocated(lwupflxc_p)   ) deallocate(lwupflxc_p   )
+
+       if(allocated(radlw3d1_p)   ) deallocate(radlw3d1_p   )
 
        if(allocated(pin_p)        ) deallocate(pin_p        )
        if(allocated(o3clim_p)     ) deallocate(o3clim_p     )
@@ -460,6 +464,15 @@
 
           case default
        end select microp_select
+
+       ! Initializing dummy radiation vars
+       do j = jts,jte
+       k = kts,kte
+       do i = its,ite
+         radlw3d1(i,k,j) = 0._RKIND
+       enddo
+       enddo
+       enddo
 
        do j = jts,jte
        do k = kts,kte+2
@@ -872,8 +885,9 @@
             lwupbc     = lwupbc_p      , lwdnb     = lwdnb_p     , lwdnbc   = lwdnbc_p , &
             ids = ids , ide = ide , jds = jds , jde = jde , kds = kds , kde = kde ,      &
             ims = ims , ime = ime , jms = jms , jme = jme , kms = kms , kme = kme ,      &
-            its = its , ite = ite , jts = jts , jte = jte , kts = kts , kte = kte        &
-                       )
+            its = its , ite = ite , jts = jts , jte = jte , kts = kts , kte = kte ,       &
+            radlw3d1 = radlw3d1_p                                                      &
+                        )
        call mpas_timer_stop('RRTMG_lw')
 
     case ("cam_lw")

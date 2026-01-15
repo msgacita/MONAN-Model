@@ -3099,6 +3099,15 @@
                 <var name="cldfrac" type="real" dimensions="nVertLevels nCells Time" units="unitless"
                      description="horizontal cloud fraction"/>
 
+                <!-- ================================================================================================== -->
+                <!-- ...DUMMY VARIABLES FOR RADIATION DEBUGGING:                                                                  -->
+                <!-- ================================================================================================== -->
+
+                <var name="radsw3d1" type="real" dimensions="nVertLevels nCells Time" units="undef"
+                     description="dummy 3d variable 1 for output only in radiation shortwave tests"/>
+
+                <var name="radlw3d1" type="real" dimensions="nVertLevels nCells Time" units="undef"
+                     description="dummy 3d variable 1 for output only in radiation longwave tests"/>
 
                 <!-- ================================================================================================== -->
                 <!-- ... PARAMETERIZATION OF LAND-SURFACE SCHEME:                                                       -->

@@ -9879,7 +9879,8 @@ CONTAINS
                        swddir,swddni,swddif,                           &
                        ids,ide, jds,jde, kds,kde,                      & 
                        ims,ime, jms,jme, kms,kme,                      &
-                       its,ite, jts,jte, kts,kte                       &
+                       its,ite, jts,jte, kts,kte,                      &
+                       rrtmg_swrad                                     &
                        )
 
  implicit none
@@ -9921,6 +9922,10 @@ CONTAINS
      swddir,swddni,swddif
   real,intent(out),dimension(ims:ime,kms:kme+2,jms:jme ),optional:: &
      swupflx,swupflxc,swdnflx,swdnflxc
+  !dummy variable for debbuging
+  real,intent(out),dimension(ims:ime,jms:jme),optional:: &
+     radsw3d1
+
 
 !local variables and arrays:
  logical:: dorrsw
@@ -10428,6 +10433,13 @@ CONTAINS
                 swdnflxc(i,k,j) = swdflxc(1,k)
              enddo
           endif
+
+       !Output debugging variable 
+         do k = kts, kte
+            if(cldfra3d(i,k,j) .gt. 0.) then
+               radsw3d1(i,k,j) = cswpmcl(ncol,k)
+            endif
+         enddo   
 
           !--- output heating rate tendency; convert heating rate from K/d to K/s:
           do k = kts, kte 
