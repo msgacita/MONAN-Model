@@ -650,6 +650,7 @@
                                           lwupt,lwuptc,olrtoa
  real(kind=RKIND),dimension(:,:),pointer:: rthratenlw
  real(kind=RKIND),dimension(:,:),pointer:: rre_cloud,rre_ice,rre_snow
+ real(kind=RKIND),dimension(:,:),pointer:: radlw3d1
 
 !local variables and arrays:
  integer:: nlay,pcols
@@ -731,6 +732,16 @@
 
           case default
        end select microp_select
+
+       !Copy debugging variable radlw3d1:
+       call mpas_pool_get_array(diag_physics,'radlw3d1',radlw3d1)
+       do j = jts,jte
+       do k = kts,kte
+       do i = its,ite
+          radlw3d1(k,i) = radlw3d1_p(i,k,j)
+       enddo
+       enddo
+       enddo
 
  end select radiation_lw_select
 
