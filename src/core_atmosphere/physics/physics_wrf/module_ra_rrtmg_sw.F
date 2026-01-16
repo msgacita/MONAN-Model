@@ -9923,7 +9923,7 @@ CONTAINS
   real,intent(out),dimension(ims:ime,kms:kme+2,jms:jme ),optional:: &
      swupflx,swupflxc,swdnflx,swdnflxc
   !dummy variable for debbuging
-  real,intent(out),dimension(ims:ime,jms:jme),optional:: &
+  real,intent(out),dimension(ims:ime,kms:kme,jms:jme),optional:: &
      radsw3d1
 
 
@@ -10437,7 +10437,7 @@ CONTAINS
        !Output debugging variable 
          do k = kts, kte
             if(cldfra3d(i,k,j) .gt. 0.) then
-               radsw3d1(i,k,j) = cswpmcl(ncol,k)
+               radsw3d1(i,k,j) = cswpmcl(1,ncol,k)
             endif
          enddo   
 
