@@ -486,9 +486,9 @@
 
        ! Initializing dummy radiation vars
        do j = jts,jte
-       k = kts,kte
+       do k = kts,kte
        do i = its,ite
-         radsw3d1(i,k,j) = 0._RKIND
+         radsw3d1_p(i,k,j) = 0._RKIND
        enddo
        enddo
        enddo
