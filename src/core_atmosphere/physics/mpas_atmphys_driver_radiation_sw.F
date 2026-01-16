@@ -638,6 +638,7 @@
                                            swupb,swupbc,swupt,swuptc,swddir,swddni,  &
                                            swddif
  real(kind=RKIND),dimension(:,:),pointer:: rthratensw
+ real(kind=RKIND),dimension(:,:),pointer:: radsw3d1
  character(len=StrKIND),pointer:: radt_sw_scheme
 !-----------------------------------------------------------------------------------------------------------------
 !call mpas_log_write(' ')
@@ -698,6 +699,17 @@
          swddif(i) = swddif_p(i,j)
        enddo
        enddo
+
+       !Copy debugging variable radsw3d1:
+       call mpas_pool_get_array(diag_physics,'radsw3d1',radsw3d1)
+       do j = jts,jte
+       do k = kts,kte
+       do i = its,ite
+          radsw3d1(k,i) = radsw3d1_p(i,k,j)
+       enddo
+       enddo
+       enddo
+
     case default
  end select radiation_sw_select
 
