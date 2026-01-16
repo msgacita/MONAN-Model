@@ -334,7 +334,7 @@
  real(kind=RKIND),dimension(:),pointer    :: sfc_albedo,sfc_emiss
  real(kind=RKIND),dimension(:,:),pointer  :: cldfrac,m_hybi,o3clim,o3vmr
  real(kind=RKIND),dimension(:,:),pointer  :: re_cloud,re_ice,re_snow
- real(kind=RKIND),dimension(:,:,:),pointer:: aerosols,ozmixm
+ real(kind=RKIND),dimension(:,:,:),pointer:: aerosols,ozmixm,radlw3d1
 
 !local variables and arrays:
  integer:: ncols,nlevs
@@ -468,7 +468,7 @@
 
        ! Initializing dummy radiation vars
        do j = jts,jte
-       k = kts,kte
+       do k = kts,kte
        do i = its,ite
          radlw3d1_p(i,k,j) = 0._RKIND
        enddo
