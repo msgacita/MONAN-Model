@@ -421,6 +421,7 @@
  radiation_lw_select: select case (trim(radt_lw_scheme))
 
     case("rrtmg_lw")
+       call mpas_pool_get_array(diag_physics,'radlw3d1'        ,radlw3d1       )
        microp_select: select case(microp_scheme)
           case("mp_thompson","mp_wsm6")
              if(config_microp_re) then
@@ -469,7 +470,7 @@
        do j = jts,jte
        k = kts,kte
        do i = its,ite
-         radlw3d1(i,k,j) = 0._RKIND
+         radlw3d1_p(i,k,j) = 0._RKIND
        enddo
        enddo
        enddo
