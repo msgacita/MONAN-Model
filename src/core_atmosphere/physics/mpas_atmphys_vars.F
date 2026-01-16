@@ -768,7 +768,7 @@ real(kind=RKIND),dimension(:,:),allocatable:: &
 !=================================================================================================================
  real(kind=RKIND),dimension(:,:,:),allocatable:: &
     radsw3d1_p,        &! 'dummy 3d variable 1 in sw for output only'              [-]
-    radlw3d1_p         &! 'dummy 3d variable 1 in lw for output only'              [-]    
+    radlw3d1_p          ! 'dummy 3d variable 1 in lw for output only'              [-]    
 
 
 !=================================================================================================================
