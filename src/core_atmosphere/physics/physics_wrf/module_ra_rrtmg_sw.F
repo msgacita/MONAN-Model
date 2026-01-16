@@ -9880,7 +9880,7 @@ CONTAINS
                        ids,ide, jds,jde, kds,kde,                      & 
                        ims,ime, jms,jme, kms,kme,                      &
                        its,ite, jts,jte, kts,kte,                      &
-                       rrtmg_swrad                                     &
+                       radsw3d1                                        &
                        )
 
  implicit none
