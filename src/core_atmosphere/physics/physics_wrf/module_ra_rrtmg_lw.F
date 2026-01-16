@@ -12127,7 +12127,7 @@ CONTAINS
        !Output debugging variable 
       do k = kts, kte
          if(cldfra3d(i,k,j) .gt. 0.) then
-            radlw3d1(i,k,j) = clwpmcl(1,ncol,k)
+            radlw3d1(i,k,j) = qi3d(i,k,j)
          endif
       enddo       
 
