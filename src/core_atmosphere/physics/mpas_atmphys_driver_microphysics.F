@@ -544,7 +544,7 @@
  integer,dimension(:),pointer:: i_rainnc
 
  real(kind=RKIND),pointer:: config_bucket_rainnc
- real(kind=RKIND),dimension(:),pointer:: precipw,precipci,ctt
+ real(kind=RKIND),dimension(:),pointer:: precipw,precipci,precipcloud, precipice,ctt
  real(kind=RKIND),dimension(:),pointer:: graupelnc,rainnc,snownc
  real(kind=RKIND),dimension(:),pointer:: graupelncv,rainncv,snowncv,sr
 
@@ -568,10 +568,15 @@
  call mpas_pool_get_array(diag_physics,'sr'        ,sr        )
  call mpas_pool_get_array(diag_physics,'ctt'       ,ctt       )
  call mpas_pool_get_array(diag_physics,'precipci'  ,precipci  )
+ call mpas_pool_get_array(diag_physics,'precipcloud'  ,precipcloud  )
+ call mpas_pool_get_array(diag_physics,'precipice'  ,precipice  )
+
 
  do i = its,ite
     precipw(i) = 0._RKIND
     precipci(i)= 0._RKIND
+    precipcloud(i) = 0._RKIND
+    precipice(i) = 0._RKIND
  enddo
 
 !variables common to all cloud microphysics schemes:
@@ -624,6 +629,9 @@
           do k = kts,kte
               rho_a = rho_p(i,k,j) / (1._RKIND + qv_p(i,k,j))
               precipci(i) = precipci(i) + (qc_p(i,k,j) + qi_p(i,k,j)) * rho_a * dz_p(i,k,j)
+              precipcloud(i) = precipcloud(i) + qc_p(i,k,j) * rho_a * dz_p(i,k,j)
+              precipice(i) = precipice(i) + qi_p(i,k,j) * rho_a * dz_p(i,k,j)
+
           enddo
           !-srf adding cloud top temperature
           ctt(i) =  ctt_p(i,j)
