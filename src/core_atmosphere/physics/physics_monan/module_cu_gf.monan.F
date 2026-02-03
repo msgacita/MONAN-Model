@@ -1217,7 +1217,10 @@ module module_cu_gf_monan
 
                rqvcuten (i,k,j) = (outq (k,i,shal) + outq (k,i,deep) + outq (k,i,mid)) *fixout_qv(i)
 
-               rqccuten (i,k,j) = (outqc(k,i,shal) + outqc(k,i,deep) + outqc(k,i,mid)) *fixout_qv(i)
+               !rqccuten (i,k,j) = (outqc(k,i,shal) + outqc(k,i,deep) + outqc(k,i,mid)) *fixout_qv(i)
+               !Test: increase outqc from deep conv to impact both ice and liquid water
+               rqccuten (i,k,j) = (outqc(k,i,shal) + 10* outqc(k,i,deep) + outqc(k,i,mid))*fixout_qv(i)
+
 
                rqicuten (i,k,j) = rqccuten (i,k,j) * (1.0-FractLiqF(temp_old(k,i)))
                
