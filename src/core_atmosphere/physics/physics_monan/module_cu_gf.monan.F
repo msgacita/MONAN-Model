@@ -1217,14 +1217,17 @@ module module_cu_gf_monan
 
                rqvcuten (i,k,j) = (outq (k,i,shal) + outq (k,i,deep) + outq (k,i,mid)) *fixout_qv(i)
 
-               !rqccuten (i,k,j) = (outqc(k,i,shal) + outqc(k,i,deep) + outqc(k,i,mid)) *fixout_qv(i)
-               !Test: increase outqc from deep conv to impact both ice and liquid water
-               rqccuten (i,k,j) = (2*outqc(k,i,shal) + outqc(k,i,deep) + outqc(k,i,mid))*fixout_qv(i)
+               ! rqccuten (i,k,j) = (outqc(k,i,shal) + outqc(k,i,deep) + outqc(k,i,mid)) *fixout_qv(i)
+               ! Increase  deep convection
+               rqccuten (i,k,j) = (outqc(k,i,shal) + 2*outqc(k,i,deep) + outqc(k,i,mid)) *fixout_qv(i)
 
-
-               rqicuten (i,k,j) = rqccuten (i,k,j) * (1.0-FractLiqF(temp_old(k,i)))
+               ! rqicuten (i,k,j) = rqccuten (i,k,j) * (1.0-FractLiqF(temp_old(k,i)))
                
-               rqccuten (i,k,j) = rqccuten (i,k,j) *      FractLiqF(temp_old(k,i))
+               ! rqccuten (i,k,j) = rqccuten (i,k,j) *      FractLiqF(temp_old(k,i))
+               !test to avaliate the liquid fraction, decrease by 30% the liquid fraction and increase by 30% the liquid fraction
+               rqicuten (i,k,j) = rqccuten (i,k,j) * (1.0-0.7*FractLiqF(temp_old(k,i)))
+               
+               rqccuten (i,k,j) = rqccuten (i,k,j) * 0.7*FractLiqF(temp_old(k,i))
   
                !- vertical updraft and downdraft mass fluxes
                rupmfxcu (i,k,j) = zup5d(k,i,j,shal) + zup5d(k,i,j,mid) + zup5d(k,i,j,deep)
