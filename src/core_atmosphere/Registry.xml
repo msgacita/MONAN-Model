@@ -2321,7 +2321,7 @@
                 <var name="precipci" type="real" dimensions="nCells Time" units="kg m^{-2}"
                      description="precipitable cloud and ice"/>
 
-                <var name="ctt" type="real" dimensions="nCells Time" units="K"
+                <var name="ctt" type="real" dimensions="nCells Time" units="C"
                      description="cloud top temperature"/>
 
                 <!-- ================================================================================================== -->
